@@ -18,9 +18,11 @@ public class EventNumbersIterator implements Iterator<Integer> {
      for (index = 0; index < data.length; index++) {
          if (data[index] % 2 == 0) {
              value = index;
-            }
+            } else {
+             return false;
+         }
         }
-     return false;
+     return true;
     }
 
     @Override
