@@ -14,15 +14,13 @@ public class EventNumbersIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        int value = 0;
-     for (index = 0; index < data.length; index++) {
-         if (data[index] % 2 == 0) {
-             value = index;
-            } else {
-             return false;
-         }
+        for (int i = index; i < data.length; i++) {
+            if (data[i] % 2 == 0) {
+                index = i;
+                return true;
+            }
         }
-     return true;
+        return false;
     }
 
     @Override
@@ -30,9 +28,8 @@ public class EventNumbersIterator implements Iterator<Integer> {
         if (!hasNext()) {
             throw new NoSuchElementException();
         } else {
-            this.hasNext();
+            return data[index++];
         }
-        return data[index++];
     }
 
 }
