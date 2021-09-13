@@ -2,6 +2,11 @@ package ru.job4j.io;
 
 import java.io.FileInputStream;
 
+/**
+ * В классе нужно прочитать файл even.txt.
+ * Для каждого числа проверить является ли оно четным числом.
+ * Ответ вывести на консоль.
+ */
 public class EvenNumberFile {
     public static void main(String[] args) {
         try (FileInputStream in = new FileInputStream("even.txt")) {
@@ -12,7 +17,7 @@ public class EvenNumberFile {
             }
             String[] lines = text.toString().split(System.lineSeparator());
             for (String line : lines) {
-                int numbers = Integer.valueOf(line);
+                int numbers = Integer.parseInt(line);
                 if (numbers % 2 == 0) {
                     System.out.println(line + " Even number");
                 } else {
