@@ -17,9 +17,11 @@ import java.util.Arrays;
 public class ResultFile {
     public static void main(String[] args) {
         try (FileOutputStream out = new FileOutputStream("result.txt")) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 10; j++) {
-                    out.write(i * j); // то что будет записываться в файл
+            for (int i = 1; i < 10; i++) {
+                for (int j = 1; j < 10; j++) {
+                    String rsl = String.valueOf(Integer.valueOf(i * j));
+                    out.write(rsl.getBytes()); // то что будет записываться в
+                    // файл
                 }
                     out.write(System.lineSeparator().getBytes());
                 //разделение строк
