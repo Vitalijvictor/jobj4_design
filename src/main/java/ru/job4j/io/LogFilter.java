@@ -37,3 +37,4 @@ public class LogFilter {
         save(log, "404.txt");
     }
 }
+
