@@ -1,11 +1,13 @@
 package ru.job4j.io;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Stream;
 
 public class Config {
 
@@ -17,10 +19,25 @@ public class Config {
     }
 
     public void load() {
+        try (BufferedReader bufferedReader =
+                     new BufferedReader(new FileReader(this.path))) {
+            if (!(bufferedReader.readLine() == null)
+                    || bufferedReader.readLine().contains("#")
+                    || bufferedReader.readLine().contains(" ")) {
+                String[] keyValue = bufferedReader.readLine().split("=");
+                if (keyValue.length != 2) {
+                    throw new IllegalArgumentException("There must be at least 2 "
+                            + "elements");
+                }
+                values.put(keyValue[0], keyValue[1]);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String value(String key) {
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        return values.get(key);
     }
 
     @Override
