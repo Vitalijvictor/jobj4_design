@@ -21,15 +21,19 @@ public class Config {
     public void load() {
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(this.path))) {
-            if (!(bufferedReader.readLine() == null)
-                    || bufferedReader.readLine().contains("#")
-                    || bufferedReader.readLine().contains(" ")) {
-                String[] keyValue = bufferedReader.readLine().split("=");
-                if (keyValue.length != 2) {
-                    throw new IllegalArgumentException("There must be at least 2 "
-                            + "elements");
+            String line = bufferedReader.readLine();
+            for (int i = 0; i < line.length(); i++) {
+                line = String.valueOf(line.charAt(i));
+                if (!(line == null)
+                        || line.contains("#")
+                        || line.contains(" ")) {
+                    String[] keyValue = line.split("=");
+                    if (keyValue.length != 2) {
+                        throw new IllegalArgumentException("There must be at least 2 "
+                                + "elements");
+                    }
+                    values.put(keyValue[0], keyValue[1]);
                 }
-                values.put(keyValue[0], keyValue[1]);
             }
         } catch (Exception e) {
             e.printStackTrace();
