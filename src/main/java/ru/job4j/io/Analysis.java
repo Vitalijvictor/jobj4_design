@@ -12,16 +12,16 @@ public class Analysis {
                 String serverDown = null;
                 while (bufferedReader.ready()) {
                     String serverStatus = bufferedReader.readLine();
-                    if (serverDown == null && serverStatus.startsWith("400")
+                    if (serverDown == null && (serverStatus.startsWith("400"))
                             || serverStatus.startsWith("500")) {
                         printWriter.println(serverStatus.split(" ")[1]
-                                + "The" + " server is down");
+                                + ";");
                         serverDown = serverStatus;
-                    } else if (serverDown != null && !serverStatus.startsWith(
-                            "400")
+                    } else if (serverDown != null && (!serverStatus.startsWith(
+                            "400"))
                             && !serverStatus.startsWith("500")) {
                             printWriter.println(serverStatus.split(" ")[1]
-                                    + "server is up");
+                                    + ";");
                             serverDown = null;
                         }
                     }

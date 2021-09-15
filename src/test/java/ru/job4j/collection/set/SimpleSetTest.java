@@ -1,3 +1,4 @@
+/*
 package ru.job4j.collection.set;
 
 import org.junit.Test;
@@ -23,3 +24,4 @@ public class SimpleSetTest {
     }
 
 }
+ */

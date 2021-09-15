@@ -18,9 +18,10 @@ public class ConfigTest {
 
     @Test
     public void whenPairWithoutComment1() {
-        String path = "./data/pair_without_comment.properties";
+        String path = "app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("name"), is("Petr Arsentev"));
+        assertThat(config.value("hibernate.connection.username"), is("postgres"));
+        assertThat(config.value("surname"), is(Matchers.nullValue()));
     }
 }
