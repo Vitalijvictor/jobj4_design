@@ -1,4 +1,3 @@
-/*
 package ru.job4j.list;
 
 import org.junit.Assert;
@@ -127,4 +126,3 @@ public class SimpleArrayListTest {
     }
 
 }
- */
