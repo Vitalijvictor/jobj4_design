@@ -1,10 +1,7 @@
 package ru.job4j.list;
 
 import java.lang.reflect.Array;
-import java.util.Arrays;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class SimpleArrayList<T> implements List<T> {
 
@@ -13,6 +10,7 @@ public class SimpleArrayList<T> implements List<T> {
     private int size;
 
     private int modCount;
+
 
     public SimpleArrayList(int capacity) {
         this.container = (T[]) new Object[capacity];
@@ -32,38 +30,30 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T set(int index, T newValue) {
-        for (T i : container) {
-            index = (int) i;
-            Array.set(container, index, newValue);
-            modCount++;
-        }
-        return (T) container;
+        Objects.checkIndex(index, container.length);
+        T previous = container[index];
+        container[index] = newValue;
+        return previous;
     }
 
     @Override
     public T remove(int index) {
-        System.arraycopy(container,
-                index + 1,
-                container,
-                index,
-                container.length - index - 1);
-        container[container.length - 1] = null;
-        return (T) container;
+        Objects.checkIndex(index, container.length);
+        T previous = container[index];
+        System.arraycopy(container, index + 1, container, index, size - index - 1);
+        container[--size] = null;
+        modCount++;
+        return previous;
     }
 
     @Override
     public T get(int index) {
-        index = Arrays.asList(container).indexOf(index);
-        return (T) container;
+        Objects.checkIndex(index, container.length);
+        return container[index];
     }
 
     @Override
     public int size() {
-        for (int i = size; i < container.length; i++) {
-            if (size == 0) {
-                return 0;
-            }
-        }
         return size;
     }
 
@@ -71,22 +61,25 @@ public class SimpleArrayList<T> implements List<T> {
     public Iterator<T> iterator() {
         return new Iterator<T>() {
             int expectedModCount = modCount;
+            int cursor = 0;
+
             @Override
             public boolean hasNext() {
-                if (container.length >= size) {
-                    return true;
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
                 }
-                return false;
+                return cursor != size;
             }
 
             @Override
             public T next() {
-                if (!hasNext()) {
+                if (cursor >= size) {
                     throw new NoSuchElementException();
-                } else if (expectedModCount != modCount) {
+                }
+                if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return null;
+                return container[cursor++];
             }
 
         };
