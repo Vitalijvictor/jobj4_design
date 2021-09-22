@@ -1,6 +1,5 @@
 package ru.job4j.list;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class SimpleArrayList<T> implements List<T> {
@@ -8,6 +7,10 @@ public class SimpleArrayList<T> implements List<T> {
     private T[] container;
 
     private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     private int modCount;
 

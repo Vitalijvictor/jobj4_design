@@ -5,19 +5,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogFilter {
-    public static List<String> filter(String file) {
-        BufferedReader text = null;
-        try {
-            text = new BufferedReader(new FileReader(file));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        text
+    public static List<String> filter(String file) throws IOException {
+        try (BufferedReader text  = new BufferedReader(new FileReader(file))) {
+            text
                     .lines()
                     .filter(s -> s.contains("404"))
                     .collect(Collectors.toList());
-
-        return (List<String>) text;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void save(List<String> log, String file) {
@@ -31,7 +28,7 @@ public class LogFilter {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         List<String> log = filter("log.txt");
         System.out.println(log);
         save(log, "404.txt");
