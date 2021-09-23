@@ -5,8 +5,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Config {
@@ -21,19 +23,17 @@ public class Config {
     public void load() {
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(this.path))) {
-            String line = bufferedReader.readLine();
-            for (int i = 0; i < line.length(); i++) {
-                line = String.valueOf(line.charAt(i));
-                if (!(line == null)
-                        || line.contains("#")
-                        || line.contains(" ")) {
-                    String[] keyValue = line.split("=");
-                    if (keyValue.length != 2) {
-                        throw new IllegalArgumentException("There must be at least 2 "
-                                + "elements");
-                    }
-                    values.put(keyValue[0], keyValue[1]);
+            List<String> lines = bufferedReader.lines().collect(Collectors.toList());
+            for (String line : lines) {
+                if (line.startsWith("#") || line.startsWith(" ")) {
+                    continue;
                 }
+                String[] keyValue = line.split("=");
+                if (keyValue.length != 2) {
+                    throw new IllegalArgumentException("There must be at least 2 "
+                            + "elements: " + line);
+                }
+                values.put(keyValue[0], keyValue[1]);
             }
         } catch (Exception e) {
             e.printStackTrace();
