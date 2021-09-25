@@ -17,15 +17,13 @@ public class AnalysisTest {
 
     @Test
     public void drop() throws IOException {
-        Analysis analysis = new Analysis();
-        File source = folder.newFile("./data/server.log");
-        File target = folder.newFile("unavailable.csv");
+        File source = folder.newFile("source.txt");
+        File target = folder.newFile("target.txt");
         try (PrintWriter out = new PrintWriter(source)) {
             out.println("hello foolish dude");
             out.println("java job4j php");
         }
-        analysis.unavailable(source.getAbsolutePath(),
-                target.getAbsolutePath());
+        Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(), List.of("foolish", "php"));
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
