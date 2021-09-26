@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 0.3. BufferedReader. [#252489 #202008]
+ */
 public class LogFilter {
     public static List<String> filter(String file) throws IOException {
         try (BufferedReader text  = new BufferedReader(new FileReader(file))) {
