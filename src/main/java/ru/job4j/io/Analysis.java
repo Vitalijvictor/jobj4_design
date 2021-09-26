@@ -9,20 +9,20 @@ public class Analysis {
                      new BufferedReader(new FileReader(source));
             PrintWriter printWriter =
                     new PrintWriter(new BufferedOutputStream(new FileOutputStream(target)))) {
-                String serverDown = null;
+                boolean serverDown = false;
                 while (bufferedReader.ready()) {
                     String serverStatus = bufferedReader.readLine();
-                    if (serverDown == null && (serverStatus.startsWith("400"))
+                    if (!serverDown  && (serverStatus.startsWith("400"))
                             || serverStatus.startsWith("500")) {
                         printWriter.println(serverStatus.split(" ")[1]
                                 + ";");
-                        serverDown = serverStatus;
-                    } else if (serverDown != null && (!serverStatus.startsWith(
+                        serverDown = Boolean.valueOf(serverStatus);
+                    } else if (serverDown && (!serverStatus.startsWith(
                             "400"))
                             && !serverStatus.startsWith("500")) {
                             printWriter.println(serverStatus.split(" ")[1]
                                     + ";");
-                            serverDown = null;
+                            serverDown = Boolean.parseBoolean(null);
                         }
                     }
                 } catch (IOException e) {
