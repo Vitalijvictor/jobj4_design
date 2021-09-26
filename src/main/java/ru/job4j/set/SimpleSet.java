@@ -4,6 +4,12 @@ import ru.job4j.list.SimpleArrayList;
 
 import java.util.Iterator;
 
+/**
+ * Для сравнения объектов использовать метод:
+ *
+ * https://docs.oracle.com/en/java/javase/16/docs/api/java.base/java/util/Objects.html#equals(java.lang.Object,java.lang.Object)
+ * @param <T>
+ */
 public class SimpleSet<T> implements Set<T> {
     private SimpleArrayList<T> set = new SimpleArrayList<>(10);
 
