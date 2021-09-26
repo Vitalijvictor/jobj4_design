@@ -25,7 +25,10 @@ public class Config {
                      new BufferedReader(new FileReader(this.path))) {
             List<String> lines = bufferedReader.lines().collect(Collectors.toList());
             for (String line : lines) {
-                if (line.startsWith("#") || line.startsWith(" ")) {
+                if (line.startsWith("#")) {
+                    continue;
+                }
+                if (line.equals(" ")) {
                     continue;
                 }
                 String[] keyValue = line.split("=");
