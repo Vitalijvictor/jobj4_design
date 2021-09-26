@@ -3,6 +3,8 @@ package ru.job4j.io;
 import java.io.FileInputStream;
 
 /**
+ * 0.2. FileInputStream [#4898 #201989]
+ *
  * В классе нужно прочитать файл even.txt.
  * Для каждого числа проверить является ли оно четным числом.
  * Ответ вывести на консоль.
