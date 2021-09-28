@@ -31,4 +31,13 @@ public class AnalysisTest {
         assertThat(rsl.toString(), is("hello dude java job4j "));
     }
 
+    public void tempFolder() throws IOException {
+        File source = folder.newFile("./data/server.log");
+        File target = folder.newFile("unavailable.csv");
+        try (PrintWriter out = new PrintWriter(source)){
+            out.println("Hi Neo");
+            out.println("follow white rabbit");
+        }
+    }
+
 }
