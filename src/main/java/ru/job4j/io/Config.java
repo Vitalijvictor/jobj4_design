@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Config {
 
@@ -23,21 +21,16 @@ public class Config {
     public void load() {
         try (BufferedReader bufferedReader =
                      new BufferedReader(new FileReader(this.path))) {
-            List<String> lines = bufferedReader.lines().collect(Collectors.toList());
-            for (String line : lines) {
-                if (line.startsWith("#")) {
-                    continue;
-                }
+            while (bufferedReader.ready()) {
+                String line = bufferedReader.readLine();
                 if (line.equals(" ")) {
                     continue;
                 }
-                String[] keyValue = line.split("=");
-                if (keyValue.length != 2) {
-                    throw new IllegalArgumentException("There must be at least 2 "
-                            + "elements: " + line);
+                if (line.startsWith("#")) {
+                    continue;
                 }
-                values.put(keyValue[0], keyValue[1]);
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
