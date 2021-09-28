@@ -18,8 +18,9 @@ public class User {
 
     public static void main(String[] args) {
         Map<User, Object> map = new HashMap<>();
-        User user1 = new User("John", 2, Calendar.getInstance(Locale.GERMANY));
-        User user2 = new User("John", 2, Calendar.getInstance(Locale.GERMANY));
+        Calendar date = Calendar.getInstance();
+        User user1 = new User("John", 2, date);
+        User user2 = new User("John", 2, date);
         map.put(user1, new Object());
         map.put(user2, new Object());
         System.out.println(map);
