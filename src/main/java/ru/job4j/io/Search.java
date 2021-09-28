@@ -11,21 +11,26 @@ import static java.nio.file.FileVisitResult.CONTINUE;
 public class Search {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get("C:\\projects\\job4j_design");
-        search(start, p -> p.toFile().getName().endsWith("test")).forEach(System.out::println);
+        search(start, p -> p.toFile().getName().endsWith("js")).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
-        List<Path> result = new ArrayList<>();
-        result = (List<Path>) Files.walkFileTree(root, searcher);
-        return result;
+        Files.walkFileTree(root, searcher);
+        return searcher.getPaths();
     }
 }
 
 class  SearchFiles implements FileVisitor<Path> {
-
+    private List<Path> paths = new ArrayList<>();
+    private Predicate<Path> predicate;
 
     public SearchFiles(Predicate<Path> condition) {
+        this.predicate = condition;
+    }
+
+    public List<Path> getPaths() {
+        return paths;
     }
 
     @Override
@@ -35,7 +40,9 @@ class  SearchFiles implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        System.out.println(file.toAbsolutePath());
+        if (predicate.test(file)) {
+            paths.add(file);
+        }
         return CONTINUE;
     }
 
