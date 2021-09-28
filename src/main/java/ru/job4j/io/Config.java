@@ -27,8 +27,13 @@ public class Config {
                 if (line.startsWith("#")) {
                     continue;
                 }
+            String[] keyValue = line.split("=");
+            if (keyValue.length != 2) {
+                throw new IllegalArgumentException("There must be at least 2 "
+                        + "elements: " + line);
             }
-
+            values.put(keyValue[0], keyValue[1]);
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
