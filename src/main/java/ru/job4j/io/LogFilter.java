@@ -24,11 +24,12 @@ public class LogFilter {
     }
 
     public static void save(List<String> log, String file) {
-        try (PrintWriter out = new PrintWriter(
-                new BufferedOutputStream(
+        try (PrintWriter out = new PrintWriter(new BufferedOutputStream(
                         new FileOutputStream(file)
                 ))) {
-            out.println(log);
+            for (String line : log) {
+                out.println(line);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
