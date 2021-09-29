@@ -1,4 +1,3 @@
-/*
 package ru.job4j.tree;
 
 import java.util.*;
@@ -12,11 +11,15 @@ public class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        if (Tree<E> Node)
-//        if (!child.equals(root) && parent.equals(root)) {
-//            return true;
-//        }
-//        return false;
+        boolean rsl = false;
+        if (!findBy(child).isPresent()) {
+            Node<E> temp = findBy(parent).get();
+            if (temp != null) {
+                temp.children.add(new Node<E>(child));
+                rsl = true;
+            }
+        }
+        return rsl;
     }
 
     @Override
@@ -35,4 +38,3 @@ public class SimpleTree<E> implements Tree<E> {
         return rsl;
     }
 }
- */

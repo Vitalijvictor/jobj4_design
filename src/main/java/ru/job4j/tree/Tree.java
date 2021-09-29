@@ -12,6 +12,11 @@ public interface Tree<E> {
 
     class Node<E> {
         final E value;
+
+        public List<Node<E>> getChildren() {
+            return children;
+        }
+
         final List<Node<E>> children = new ArrayList<>();
 
         public Node(E value) {
