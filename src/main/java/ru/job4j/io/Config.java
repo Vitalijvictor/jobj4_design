@@ -21,7 +21,7 @@ public class Config {
                      new BufferedReader(new FileReader(this.path))) {
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if (line.equals(" ")) {
+                if (line.isEmpty()) {
                     continue;
                 }
                 if (line.startsWith("#")) {
@@ -34,7 +34,7 @@ public class Config {
             }
             values.put(keyValue[0], keyValue[1]);
         }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
