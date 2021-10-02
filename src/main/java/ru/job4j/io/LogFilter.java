@@ -15,7 +15,7 @@ public class LogFilter {
         try (BufferedReader text  = new BufferedReader(new FileReader(file))) {
             list = text
                     .lines()
-                    .filter(s -> s.contains("404"))
+                    .filter(s -> s.contains(" 404 "))
                     .collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -37,7 +37,10 @@ public class LogFilter {
 
     public static void main(String[] args) throws IOException {
         List<String> log = filter("log.txt");
-        System.out.println(log);
+        for (String line : log
+             ) {
+            System.out.println(line);
+        }
         save(log, "404.txt");
     }
 }
