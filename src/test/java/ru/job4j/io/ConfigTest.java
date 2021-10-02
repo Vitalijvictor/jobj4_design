@@ -24,4 +24,18 @@ public class ConfigTest {
         assertThat(config.value("hibernate.connection.username"), is("postgres"));
         assertThat(config.value("surname"), is(Matchers.nullValue()));
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenTestIsNotValidateWithKey() {
+        String path = "NullKey.properties";
+        Config config = new Config(path);
+        config.load();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void whenTestIsNotValidateWithValue() {
+        String path = "NullValue.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }

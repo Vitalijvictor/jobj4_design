@@ -21,14 +21,11 @@ public class Config {
                      new BufferedReader(new FileReader(this.path))) {
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
-                if (line.isEmpty()) {
-                    continue;
-                }
-                if (line.startsWith("#")) {
+                if (line.isEmpty() || line.startsWith("#")) {
                     continue;
                 }
             String[] keyValue = line.split("=");
-            if (keyValue.length != 2) {
+            if (keyValue.length != 2 || keyValue[0].trim().isEmpty()) {
                 throw new IllegalArgumentException("There must be at least 2 "
                         + "elements: " + line);
             }
