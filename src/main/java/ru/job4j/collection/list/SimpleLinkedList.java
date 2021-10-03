@@ -1,59 +1,68 @@
-/*
 package ru.job4j.collection.list;
 
-import ru.job4j.generics.Node;
-
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.Objects;
 
 public class SimpleLinkedList<E> implements List<E> {
-    transient Node<E> first;
-    transient Node<E> last;
-    transient Node<E> node;
-    transient int size = 0;
+    private Node<E> first;
+    private Node<E> last;
+    private Node<E> node;
     private int modCount = 0;
 
-    static class Node<E> {
-        E item;
-        Node<E> next;
-        Node<E> prev;
+    public SimpleLinkedList() {
 
-        public Node(E item, Node<E> next, Node<E> prev) {
-            this.item = item;
-            this.next = next;
-            this.prev = prev;
-        }
     }
-
     @Override
     public void add(E value) {
-        Node<E> newNode = new Node<>(value, last, first);
-        final Node<E> f = first;
-        first = newNode;
-        if (f == null) {
-            last = newNode;
+        if (last != null) {
+            Node<E> tmp = new Node<>(value, null, last);
+            last.next = tmp;
+            last = tmp;
         } else {
-            f.next = newNode;
-            size++;
-            modCount++;
+            first = new Node<>(value, null, null);
+            last = first;
         }
+        modCount++;
     }
 
     @Override
     public E get(int index) {
-        Objects.checkIndex(index, size);
-        return (E) node[index];
+        Objects.checkIndex(index, modCount);
+        if (index == 0) {
+            return first.item;
+        }
+        int temp = 0;
+        Node<E> node = first;
+        while (temp != index) {
+            temp++;
+            node = node.next;
+        }
+        return node.item;
     }
 
     @Override
     public Iterator<E> iterator() {
-        int expectedModCount = modCount;
-        if (expectedModCount != modCount) {
-            throw new ConcurrentModificationException();
-        }
-        return (Iterator<E>) node[size++];
+        return new Iterator<E>() {
+            int expectedModCount = modCount;
+            int cursor = 0;
+
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return true;
+            }
+
+            @Override
+            public E next() {
+                if (cursor >= modCount) {
+                    throw  new ConcurrentModificationException();
+                }
+                return iterator().next();
+            }
+        };
     }
+
 }
-*/

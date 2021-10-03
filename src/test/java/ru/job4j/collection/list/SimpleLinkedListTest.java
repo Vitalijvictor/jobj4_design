@@ -1,4 +1,3 @@
-/*
 package ru.job4j.collection.list;
 
 import org.hamcrest.core.Is;
@@ -12,7 +11,7 @@ public class SimpleLinkedListTest {
 
     @Test
     public void whenAddAndGet() {
-        List<Integer> list = new SimpleLinkedList<>(3, 1,3,2,4);
+        List<Integer> list = new SimpleLinkedList<>();
         list.add(1);
         list.add(2);
         assertThat(list.get(0), Is.is(1));
@@ -49,4 +48,4 @@ public class SimpleLinkedListTest {
     }
 
 }
-*/
+
