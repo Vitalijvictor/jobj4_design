@@ -7,12 +7,11 @@ import java.util.Objects;
 public class SimpleLinkedList<E> implements List<E> {
     private Node<E> first;
     private Node<E> last;
-    private Node<E> node;
     private int modCount = 0;
 
     public SimpleLinkedList() {
-
     }
+
     @Override
     public void add(E value) {
         if (last != null) {
@@ -64,5 +63,4 @@ public class SimpleLinkedList<E> implements List<E> {
             }
         };
     }
-
 }
