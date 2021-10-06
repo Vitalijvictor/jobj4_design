@@ -1,4 +1,3 @@
-/*
 package ru.job4j.tree;
 
 import org.junit.Test;
@@ -43,4 +42,3 @@ public class SimpleTreeTest {
     }
 
 }
- */
