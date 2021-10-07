@@ -36,15 +36,13 @@ public class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        boolean rsl = false;
-        if (!findBy(child).isPresent()) {
-            Node<E> temp = findBy(parent).get();
-            if (temp != null) {
-                temp.children.add(new Node<E>(child));
-                rsl = true;
-            }
+        var childEl = findBy(child);
+        var parentEl = findBy(parent);
+        if (parentEl.isEmpty() || childEl.isPresent()) {
+            return false;
         }
-        return rsl;
+        parentEl.get().children.add(new Node<E>(child));
+        return true;
     }
 
     @Override
