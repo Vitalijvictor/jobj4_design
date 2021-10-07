@@ -25,6 +25,12 @@ public class SimpleLinkedListTest {
         list.add(2);
         list.get(2);
     }
+    @Test
+    public void whenAddAndGet1() {
+        List<Integer> list = new SimpleLinkedList<>();
+        list.add(1);
+        Iterator<Integer> it = list.iterator();
+    }
 
     @Test
     public void whenGetIteratorTwiceThenEveryFromBegin() {
@@ -48,4 +54,3 @@ public class SimpleLinkedListTest {
     }
 
 }
-
