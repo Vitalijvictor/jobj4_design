@@ -3,10 +3,6 @@ package ru.job4j.tree;
 import java.util.*;
 import java.util.function.Predicate;
 
-/**
- * Класс Node описывает узел дерева. Узел содержит хранимое значение и ссылки на дочерние узлы.
- * @param <E>
- */
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
