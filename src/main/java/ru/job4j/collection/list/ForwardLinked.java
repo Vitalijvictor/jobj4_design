@@ -3,6 +3,10 @@ package ru.job4j.collection.list;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * 3. Удалить head в односвязном списке. [#51424 #215277]
+ * @param <T>
+ */
 public class ForwardLinked<T> implements Iterable<T> {
     private Node<T> head;
 

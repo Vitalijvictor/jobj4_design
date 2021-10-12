@@ -9,6 +9,9 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
+/**
+ * 3. Удалить head в односвязном списке. [#51424 #215277]
+ */
 public class ForwardLinkedTest {
 
     @Test(expected = NoSuchElementException.class)
