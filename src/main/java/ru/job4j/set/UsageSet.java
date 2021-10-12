@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Fix comment errors
+ */
 public class UsageSet {
     public static void main(String[] args) {
         Set<String> strings = new HashSet<>();
