@@ -3,15 +3,6 @@ package ru.job4j.tree;
 import java.util.*;
 import java.util.function.Predicate;
 
-/**
- * Класс Node описывает узел дерева. Узел содержит хранимое значение и ссылки на дочерние узлы.
- *
- * Метод add - Должен находить узел по значению parent и добавлять в него дочерний узел со значением child.
- * В этом методе нужно проверить, что значения child еще нет в дереве а parent есть. Если child есть, то метод должен вернуть false.
- *
- * Давайте создадим класс реализующий интерфейс ru.job4j.tree.SimpleTree.
- * @param <E>
- */
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
