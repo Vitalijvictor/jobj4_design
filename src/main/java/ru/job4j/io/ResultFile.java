@@ -20,11 +20,9 @@ public class ResultFile {
             for (int i = 1; i < 10; i++) {
                 for (int j = 1; j < 10; j++) {
                     String rsl = String.valueOf(Integer.valueOf(i * j));
-                    out.write(rsl.getBytes()); // то что будет записываться в
-                    // файл
+                    out.write(rsl.getBytes());
                 }
                     out.write(System.lineSeparator().getBytes());
-                //разделение строк
                 }
             } catch (IOException e) {
             e.printStackTrace();

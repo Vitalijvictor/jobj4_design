@@ -25,7 +25,7 @@ public class GenericUsage {
         list.add("second");
         list.add("third");
         for (int i = 0; i < list.size(); i++) {
-            String s = (String) list.get(i); //  down casting
+            String s = (String) list.get(i);
             System.out.println("Текущий элемент: " + s);
         }
 
@@ -44,8 +44,7 @@ public class GenericUsage {
         new GenericUsage().printInfo(per);
 
         List<Programmer> pro = List.of(new Programmer("name123", 23, new Date(913716000000L)));
-        new GenericUsage().printInfo(pro);  //эта модель работает потому что
-        // Programmer extends Person   <? extends Person>
+        new GenericUsage().printInfo(pro);
 
         System.out.println(System.lineSeparator());
         List<? super Integer> list2 = new ArrayList<>();

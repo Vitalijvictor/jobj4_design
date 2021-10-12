@@ -16,10 +16,6 @@ public class ArrayIt implements Iterator<Integer> {
         return point < data.length;
     }
 
-//    @Override
-//    public Integer next() {
-//        return data[point++];
-//    }
 
     @Override
     public Integer next() {

@@ -11,8 +11,6 @@ public class ListUsage {
          * т.е. вызвать метод add(), remove() и т.п.
          * на такой коллекции не получится,
          * будет сгенерировано исключение UnsupportedOperationException.
-         */
-        //List<String> rsl = List.of("one", "two", "three");
         /**
          * Такой метод можно изменять
          */
@@ -20,11 +18,6 @@ public class ListUsage {
         rsl.add("one");
         rsl.add("two");
         rsl.add("three");
-        //rsl.add(1, "four");
-
-//        List<String> list = new ArrayList<>();
-//        list.add("four");
-//        list.add("five");
 
         List<String> list = new ArrayList<>();
         list.add("four");
@@ -32,7 +25,6 @@ public class ListUsage {
 
         rsl.addAll(2, list);
 
-//        rsl.addAll(list);
         Iterator<String> iterator = rsl.iterator();
         while (iterator.hasNext()) {
             System.out.println("Текущий элемент: " + iterator.next());
