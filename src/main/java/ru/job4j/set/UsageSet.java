@@ -7,7 +7,7 @@ import java.util.Set;
 
 public class UsageSet {
     public static void main(String[] args) {
-          Set<String> strings = new HashSet<>();
+        Set<String> strings = new HashSet<>();
         strings.add("one");
         strings.add("two");
         strings.add("two");
@@ -51,8 +51,7 @@ public class UsageSet {
         }
 
         System.out.println(System.lineSeparator());
-        boolean b = strings.contains("two"); //проверка если строка
-        // strings содержит переданный в метод элемент. В нашем случии two
+        boolean b = strings.contains("two");
         System.out.println("Множество содержит элемент: " + b);
 
         System.out.println(System.lineSeparator());
