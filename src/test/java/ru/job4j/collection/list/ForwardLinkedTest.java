@@ -1,5 +1,6 @@
 package ru.job4j.collection.list;
 
+import org.hamcrest.core.Is;
 import org.junit.Test;
 
 import java.util.Iterator;
@@ -36,5 +37,16 @@ public class ForwardLinkedTest {
         assertThat(linked.deleteFirst(), is(notNullValue()));
         Iterator<Integer> it = linked.iterator();
         assertThat(it.next(), is(2));
+    }
+
+    @Test
+    public void whenAddFirst() {
+        ForwardLinked<Integer> linked = new ForwardLinked<>();
+        linked.add(1);
+        linked.add(2);
+        linked.add(3);
+        linked.add(4);
+        linked.addFirst(5);
+        assertThat("5", 5, Is.is(5));
     }
 }
