@@ -4,6 +4,9 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
+/**
+ * В этом уроке мы познакомимся с алгоритмом обхода дерева в ширину - breadth first search.
+ */
 public class SimpleTreeTest {
     @Test
     public void when6ElFindLastThen6() {
