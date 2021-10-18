@@ -8,6 +8,7 @@ import java.util.Iterator;
  * Новая тарелка всегда оказывается верхней.
  * Если нам нужно достать тарелку из середины стопки, то нужно снять верхние тарелки.
  *
+ *
  * Stack лучше всего реализовать на базе связанного списка. Почему связанный список лучше всего подходит для этого?
  * Связанный список умеет быстро вставлять данные и удалять с начала или конца.
  * Это поведение как раз и нужно при реализации стэка.
@@ -21,11 +22,12 @@ public class SimpleStack<T> {
         Iterator<T> iter = linked.iterator();
         if (!iter.hasNext()) {
             return null;
+        } else {
+            linked.deleteFirst();
         }
-        T value = iter.next();
-        linked.deleteFirst();
-        return value;
+        return iter.next();
     }
+
     public void push(T value) {
         linked.addFirst(value);
     }
