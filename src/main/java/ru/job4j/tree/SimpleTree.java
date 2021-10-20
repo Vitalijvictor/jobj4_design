@@ -3,10 +3,6 @@ package ru.job4j.tree;
 import java.util.*;
 import java.util.function.Predicate;
 
-/**
- * В этом уроке мы познакомимся с алгоритмом обхода дерева в ширину - breadth first search.
- * @param <E>
- */
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
