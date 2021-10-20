@@ -3,6 +3,10 @@ package ru.job4j.tree;
 import java.util.*;
 import java.util.function.Predicate;
 
+/**
+ * 2. Добавить метод boolean isBinary() [#1712 #218446]
+ * @param <E>
+ */
 public class SimpleTree<E> implements Tree<E> {
     private final Node<E> root;
 
