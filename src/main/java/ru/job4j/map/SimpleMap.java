@@ -4,6 +4,11 @@ import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
+/**
+ * 8. Реализовать собственную структуру данных - HashMap [#1008 #219221]
+ * @param <K>
+ * @param <V>
+ */
 public class SimpleMap<K, V> implements Map<K, V> {
 
     private static final float LOAD_FACTOR = 0.75f;
