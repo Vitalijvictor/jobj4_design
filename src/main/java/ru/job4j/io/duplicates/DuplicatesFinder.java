@@ -8,11 +8,7 @@ import java.util.stream.Collectors;
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
         DuplicatesVisitor visitor = new DuplicatesVisitor();
-        Path path = Files.walkFileTree(Path.of("Files"), visitor);
-        visitor.getPaths().entrySet().stream()
-                .filter(f -> f.getValue().size() > 1)
-                .collect(Collectors.toList())
-                .forEach(f -> f.getValue().stream()
-                        .forEach(System.out::println));
+        Path path = Files.walkFileTree(Path.of("Files"),
+                visitor.duplicatesFinder(visitor));
     }
 }
