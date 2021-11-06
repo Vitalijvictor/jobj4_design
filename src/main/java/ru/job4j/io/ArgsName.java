@@ -14,10 +14,18 @@ public class ArgsName {
     }
 
     private void parse(String[] args) {
-        for (String string: args) {
+        for (String string : args) {
+            if (!string.contains("-") || !string.contains("=")) {
+                throw new IllegalArgumentException();
+            }
             String[] rsl = string.split("=");
             if (rsl.length < 2) {
                 throw new IllegalArgumentException();
+            }
+            for (String s : rsl) {
+                if (s.isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
             }
             values.put(rsl[0].replace("-", ""), rsl[1]);
         }
@@ -30,10 +38,9 @@ public class ArgsName {
     }
 
     public static void main(String[] args) {
-        ArgsName jvm = ArgsName.of(new String[] {"-Xmx=512", "-encoding=UTF-8"});
+        ArgsName jvm = ArgsName.of(new String[]{"-Xmx=512", "-encoding=UTF-8"});
         System.out.println(jvm.get("Xmx"));
-
-        ArgsName zip = ArgsName.of(new String[] {"-out=project.zip", "-encoding=UTF-8"});
+        ArgsName zip = ArgsName.of(new String[]{"-out=project.zip", "-encoding=UTF-8"});
         System.out.println(zip.get("out"));
     }
 }

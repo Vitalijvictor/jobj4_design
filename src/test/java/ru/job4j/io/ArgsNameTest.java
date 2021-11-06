@@ -37,16 +37,18 @@ public class ArgsNameTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void whenAbsentHyphen() {
-        ArgsName jvm = ArgsName.of(new String[] {"-enconding=UTF8", "-Xmx="});
+        ArgsName jvm = ArgsName.of(new String[] {"enconding=UTF8", "-Xmx=512"});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenAbsentEquals() {
-        ArgsName jvm = ArgsName.of(new String[] {"-encondingUTF-8", "-Xmx"});
+        ArgsName jvm = ArgsName.of(new String[] {"-encondingUTF-8", "-Xmx512"});
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void whenEqualsMoreThan2() {
-        ArgsName jvm = ArgsName.of(new String[] {"-enconding==UTF-8", "-Xmx"});
+        ArgsName jvm = ArgsName.of(new String[] {"-enconding==UTF-8", "-Xmx"
+                + "=512"
+                });
     }
 }
