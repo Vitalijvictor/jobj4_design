@@ -2,7 +2,6 @@ package ru.job4j.io.duplicates;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
@@ -32,7 +31,6 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public List<Path> duplicatesFinder() throws IOException {
-//        Files.walkFileTree(Path.of("C:\\projects\\job4j_design\\Files"), this);
         List<Map.Entry<FileProperty, List<Path>>> entries = this.getPaths().entrySet().stream()
                 .filter(f -> f.getValue().size() > 1).collect(Collectors.toList());
 
