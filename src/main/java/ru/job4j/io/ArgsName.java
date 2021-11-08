@@ -19,7 +19,7 @@ public class ArgsName {
                 throw new IllegalArgumentException();
             }
             String[] rsl = string.split("=");
-            if (rsl.length < 2) {
+            if (rsl.length != 2) {
                 throw new IllegalArgumentException();
             }
             for (String s : rsl) {
