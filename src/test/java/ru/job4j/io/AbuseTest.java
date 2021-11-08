@@ -22,7 +22,8 @@ public class AbuseTest {
             out.println("hello foolish dude");
             out.println("java job4j php");
         }
-        Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(), List.of("foolish", "php"));
+        Abuse.drop(source.getAbsolutePath(), target.getAbsolutePath(),
+                List.of("foolish", "php"));
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);

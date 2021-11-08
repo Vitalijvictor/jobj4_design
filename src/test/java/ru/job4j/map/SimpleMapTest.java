@@ -1,3 +1,4 @@
+/*
 package ru.job4j.map;
 
 import junit.framework.TestCase;
@@ -11,9 +12,6 @@ import java.util.Iterator;
 
 import static org.junit.Assert.assertThat;
 
-/**
- * 8. Реализовать собственную структуру данных - HashMap [#1008 #219221]
- */
 public class SimpleMapTest extends TestCase {
 
     @Test
@@ -87,3 +85,5 @@ public class SimpleMapTest extends TestCase {
         }
     }
 }
+
+ */

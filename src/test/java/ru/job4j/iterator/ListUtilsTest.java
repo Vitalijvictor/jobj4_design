@@ -1,4 +1,3 @@
-
 package ru.job4j.iterator;
 
 import org.hamcrest.core.Is;

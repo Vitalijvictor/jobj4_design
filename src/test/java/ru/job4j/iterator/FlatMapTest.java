@@ -1,8 +1,7 @@
 package ru.job4j.iterator;
 
+import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import java.util.Iterator;
 import java.util.List;
@@ -59,30 +58,5 @@ public class FlatMapTest {
         ).iterator();
         FlatMap<Object> flat = new FlatMap<>(data);
         flat.next();
-    }
-
-    @Test
-    public void whenSeveralEmptyAndNotEmpty() {
-        Iterator<Iterator<?>> it = List.of(
-                List.of().iterator(),
-                List.of().iterator(),
-                List.of().iterator(),
-                List.of(1).iterator()
-        ).iterator();
-        FlatMap flat = new FlatMap(it);
-        assertTrue(flat.hasNext());
-        assertThat(1, is(flat.next()));
-    }
-
-    @Test
-    public void whenSeveralEmptyThenReturnFalse() {
-        Iterator<Iterator<Object>> it = List.of(
-                List.of().iterator(),
-                List.of().iterator(),
-                List.of().iterator(),
-                List.of().iterator()
-        ).iterator();
-        FlatMap flat = new FlatMap(it);
-        assertFalse(flat.hasNext());
     }
 }

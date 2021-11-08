@@ -32,8 +32,9 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     }
 
     public List<Path> duplicatesFinder() throws IOException {
-        Files.walkFileTree(Path.of("C:\\projects\\job4j_design\\Files"), this);
-        List<Map.Entry<FileProperty, List<Path>>> entries = this.getPaths().entrySet().stream().filter(f -> f.getValue().size() > 1).collect(Collectors.toList());
+//        Files.walkFileTree(Path.of("C:\\projects\\job4j_design\\Files"), this);
+        List<Map.Entry<FileProperty, List<Path>>> entries = this.getPaths().entrySet().stream()
+                .filter(f -> f.getValue().size() > 1).collect(Collectors.toList());
 
         List<Path> paths = entries.stream().flatMap(f -> f.getValue().stream()).collect(Collectors.toList());
         return paths;
