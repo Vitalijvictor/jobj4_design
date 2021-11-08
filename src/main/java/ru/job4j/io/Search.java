@@ -15,8 +15,13 @@ public class Search {
         }
 
         Path start = Paths.get(args[0]);
-        search(start, p -> p.toFile().getName().endsWith("." + args[1]))
-                .forEach(System.out::println);
+        if (start == null) {
+            throw new IllegalArgumentException("The first argument in the "
+                    + "array is null. ");
+        } else {
+            search(start, p -> p.toFile().getName().endsWith("." + args[1]))
+                    .forEach(System.out::println);
+        }
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
