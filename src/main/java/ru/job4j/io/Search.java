@@ -18,7 +18,7 @@ public class Search {
 
         Path startPath = Paths.get(args[0]);
         File start = new File(String.valueOf(startPath));
-        if (start.isDirectory() && start.exists()) {
+        if (!start.isDirectory()) {
             throw new IllegalArgumentException("The first argument in the " + "array is null. ");
         } else {
             search(startPath, p -> p.toFile().getName().endsWith("." + args[1])).forEach(System.out::println);
