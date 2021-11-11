@@ -1,17 +1,25 @@
 package ru.job4j.io;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UsageLog4j {
 
-    private static final Logger LOG = LogManager.getLogger(UsageLog4j.class.getName());
+    private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        char name = 'V';
+        char nationality = 'R';
+        char doggyName = 'T';
+        char city = 'A';
+        char land = 'B';
+        byte age = 43;
+        int yearOfBirth = 1978;
+        int zipCode = 2018;
+        LOG.debug("User info name : {}, age : {}, year of birth : {}, "
+                        + "nationality : {}, zip code : {},city : {}, land : "
+                        + "{}, doggy name : {}",
+                name,
+                age, yearOfBirth, nationality, zipCode, city, land, doggyName);
     }
 }
