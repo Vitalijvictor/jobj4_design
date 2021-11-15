@@ -2,9 +2,6 @@ package ru.job4j.serialization.json;
 
 import java.util.Arrays;
 
-/**
- * JSON (JavaScript Object Notation)
- */
 public class Person {
     private final boolean sex;
     private final int age;
