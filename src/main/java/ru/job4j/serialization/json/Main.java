@@ -1,10 +1,6 @@
 package ru.job4j.serialization.json;
 
 import com.google.gson.*;
-
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.Serializable;
 
 public class Main implements Serializable {
@@ -27,6 +23,5 @@ public class Main implements Serializable {
         final Gson jsonBackToString = new GsonBuilder().create();
         System.out.println(jsonBackToString.toJson(personMod
                 + "   -  back to" + " json"));
-
     }
 }
