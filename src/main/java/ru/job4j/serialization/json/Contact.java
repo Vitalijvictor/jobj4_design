@@ -1,12 +1,12 @@
-package ru.job4j.serialization.java.json;
+package ru.job4j.serialization.json;
 
 /**
  * JSON (JavaScript Object Notation)
  */
-public class Contacts {
+public class Contact {
     private final String phone;
 
-    public Contacts(String phone) {
+    public Contact(String phone) {
         this.phone = phone;
     }
 
