@@ -30,25 +30,17 @@ public class Contact implements Serializable {
         final Contact contact = new Contact(123456, "+7 (111) 111-11-11");
         System.out.println(contact + "  Initial data");
 
-        /* Запись объекта во временный файл, который удалится системой */
         System.out.println(System.lineSeparator());
         File tempFile = Files.createTempFile(null, null).toFile();
-        try (FileOutputStream fos = new FileOutputStream(tempFile);
-             ObjectOutputStream oos =
-                     new ObjectOutputStream(fos)) {
+        try (FileOutputStream fos = new FileOutputStream(tempFile); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
             oos.writeObject(contact);
-            System.out.println(contact + "  Writing an object to a temporary "
-                    + "file");
+            System.out.println(contact + "  Writing an object to a temporary " + "file");
         }
 
-        /* Чтение объекта из файла */
         System.out.println(System.lineSeparator());
-        try (FileInputStream fis = new FileInputStream(tempFile);
-             ObjectInputStream ois =
-                     new ObjectInputStream(fis)) {
+        try (FileInputStream fis = new FileInputStream(tempFile); ObjectInputStream ois = new ObjectInputStream(fis)) {
             final Contact contactFromFile = (Contact) ois.readObject();
-            System.out.println(contactFromFile + "  Reading an object from a "
-                    + "file");
+            System.out.println(contactFromFile + "  Reading an object from a " + "file");
         }
     }
 }
