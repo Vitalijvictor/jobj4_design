@@ -1,5 +1,8 @@
 package ru.job4j.serialization.json;
 
+/**
+ * JSON (JavaScript Object Notation)
+ */
 public class Contact {
     private final String phone;
 
