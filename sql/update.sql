@@ -1,0 +1,1 @@
+update gamers set name = 'Ludo';
