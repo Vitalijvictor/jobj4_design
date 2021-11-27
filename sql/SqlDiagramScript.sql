@@ -9,13 +9,13 @@ create table firstBiologicalChild(
     id serial primary key,
     name varchar(255),
     dna int,
-    position_id int references position(id)
+    maleBiologicalParent_id int references maleBiologicalParent(id)
 );
 create table secondBiologicalChild(
     id serial primary key,
     name varchar(255),
     dna int,
-    position_id int references position(id)
+    maleBiologicalParent_id int references maleBiologicalParent(id)
 );
 
 one-to-one
@@ -32,13 +32,13 @@ create table dna(
 
 many-to-many
 
-create table soccerTeams(
+create table clubsOfUEFA(
      id serial primary key,
      teamName varchar(50),
-     soccerPlayer_id int references soccerPlayers(id),
+     countries_id int references countries(id),
      soccerClub_id int references soccerClubs(id)
  );
- create table soccerPlayers(
+ create table countries(
     id serial primary key,
      name varchar(255)
  );
