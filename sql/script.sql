@@ -8,7 +8,8 @@ insert into fauna(name, avg_age, discovery_date) values ('Bacillus permians', 25
 insert into fauna(name, avg_age, discovery_date) values ('Xestospongia muta', 50000 , null);
 
 select * from fauna where name like '%fish';
-select * from fauna where (avg_age >=10000) and (avg_age<=25000);
-select * from fauna where discovery_date = null;
+select * from fauna where avg_age between 10000
+and 25000;
+select * from fauna where discovery_date is null;
 select * from fauna where discovery_date <'1950-00-0';
 
