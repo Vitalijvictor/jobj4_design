@@ -1,58 +1,51 @@
-create table registration_number(
+create table devices(
     id serial primary key,
-    state varchar(255),
-    register_number int
+    name varchar(255),
+    price float
 );
 
-create table vehicle(
+create table people(
     id serial primary key,
-    brand varchar(255),
-	model varchar(255),
-	year_of_issue int,
-    registration_number_id int references registration_number(id) unique
+    name varchar(255)
 );
 
-insert into registration_number(state,
-register_number) values ('Alabama', 1445412);
-insert into registration_number(state,
-register_number) values ('Dacota', 1588656);
-insert into registration_number(state,
-register_number) values ('Virginia', 1475555);
-insert into registration_number(state,
-register_number) values ('New York', 2545523);
-insert into registration_number(state,
-register_number) values ('Montana', 556621);
-insert into registration_number(state,
-register_number) values ('Dacota', 5454988);
+create table devices_people(
+    id serial primary key,
+    device_id int references devices(id),
+    people_id int references people(id)
+);
+
+insert into devices (name, price) values
+('Gsm', 523.25), ('Hi-Fi', 874.54),
+('Helicopter', 1253.78), ('Action Cam', 964.02);
+
+insert into people (name) values ('Jim Morison');
+insert into people (name) values ('Johan
+Fisher'), ('Lenny Moons'), ('Eddy Van Halen');
+
+insert into devices_people (device_id, people_id)
+values (3, 1), (1, 1), (2, 2), (4, 2), (1, 2),
+(3, 3);
+
+select avg(price) from devices;
+
+select ppl.id, ppl.name, avg(d.price) from devices_people as dp
+join devices as d on dp.device_id = d.id
+join people as ppl on dp.people_id = ppl.id
+group by ppl.id;
+
+select ppl.id, ppl.name, avg(d.price) from devices_people as dp
+join devices as d on dp.device_id = d.id
+join people as ppl on dp.people_id = ppl.id
+group by ppl.id
+having avg(d.price) > 5000;
 
 
-insert into vehicle(brand,
-model, year_of_issue, registration_number_id)
-values ('DMC', 'F12', 1956, 2);
-insert into vehicle(brand,
-model, year_of_issue, registration_number_id)
-values ('BMW', '530', 2011, 3);
-insert into vehicle(brand,
-model, year_of_issue, registration_number_id)
-values ('Mercedes', 'E220', 2017, 1);
-insert into vehicle(brand,
-model, year_of_issue, registration_number_id)
-values ('Opel', 'Zafira', 2000, 4);
-
-insert into vehicle(brand,
-model, year_of_issue)
-values ('Honda', 'Crv', 2015);
-insert into vehicle(brand,
-model, year_of_issue)
-values ('Toyota', 'Prius', 2014);
-
-select * from vehicle inner join
-registration_number r on vehicle
-.registration_number_id = r.id;
-
-select * from vehicle join registration_number
-r on vehicle.registration_number_id = r.id;
-
-select  rr.brand, r.register_number, r.state
-from vehicle as rr join registration_number as
-r on rr.registration_number_id = r.id;
+insert into devices_people(device_id,
+people_id) values (1, 2, 4, 3), (2, 4, 1, 1);
+insert into devices_people(device_id,
+people_id) values (1, 1, 4, 2), (4, 4, 1, 2);
+insert into devices_people(device_id,
+people_id) values (2, 2, 4, 3), (2, 4, 1, 1);
+insert into devices_people(device_id,
+people_id) values (1, 3, 4, 2), (4, 4, 2, 2);
