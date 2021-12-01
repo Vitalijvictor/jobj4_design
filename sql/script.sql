@@ -1,51 +1,63 @@
-create table devices(
-    id serial primary key,
-    name varchar(255),
-    price float
-);
-
-create table people(
+create table departments (
     id serial primary key,
     name varchar(255)
 );
 
-create table devices_people(
+create table emploers (
     id serial primary key,
-    device_id int references devices(id),
-    people_id int references people(id)
+    name varchar(255),
+    department_id int references departments(id)
 );
 
-insert into devices (name, price) values
-('Gsm', 523.25), ('Hi-Fi', 874.54),
-('Helicopter', 1253.78), ('Action Cam', 964.02);
+insert into departments (name)
+values
+('Financial'),
+('Government'),
+('Environmental protection'),
+('Ministry of Foreign Affairs'),
+('The Culture');
 
-insert into people (name) values ('Jim Morison');
-insert into people (name) values ('Johan
-Fisher'), ('Lenny Moons'), ('Eddy Van Halen');
+insert into emploers (name, department_id)
+values
+('Manos Bumba', 2),
+('Peter Gabriel', 3),
+('Marine Le Pen', 1),
+('Rony Size', 2),
+('Edika Bado', 4),
+('Jenny Stone', 5),
+('Alias Brams', 1),
+('Karla Ramon', 4),
+('Elisabeth Taylor', 3),
+('Alexandra Lima', 5);
 
-insert into devices_people (device_id, people_id)
-values (3, 1), (1, 1), (2, 2), (4, 2), (1, 2),
-(3, 3);
+select * from emploers e left join departments d on e.department_id = d.id;
 
-select avg(price) from devices;
+select * from departments d right join emploers e on e.departments_id = d.id;
 
-select ppl.id, ppl.name, avg(d.price) from devices_people as dp
-join devices as d on dp.device_id = d.id
-join people as ppl on dp.people_id = ppl.id
-group by ppl.id;
+select * from emploers e full join departments d on e.departments_id = d.id;
 
-select ppl.id, ppl.name, avg(d.price) from devices_people as dp
-join devices as d on dp.device_id = d.id
-join people as ppl on dp.people_id = ppl.id
-group by ppl.id
-having avg(d.price) > 5000;
+select * from emploers e cross join departments d;
+
+select * from departments d left join emploers e on e.departments_id = d.id where e.departments_id = null;
 
 
-insert into devices_people(device_id,
-people_id) values (1, 2, 4, 3), (2, 4, 1, 1);
-insert into devices_people(device_id,
-people_id) values (1, 1, 4, 2), (4, 4, 1, 2);
-insert into devices_people(device_id,
-people_id) values (2, 2, 4, 3), (2, 4, 1, 1);
-insert into devices_people(device_id,
-people_id) values (1, 3, 4, 2), (4, 4, 2, 2);
+select * from emploers e left join departments d on e.department_id = d.id;
+select * from departments d left join
+emploers e on e.department_id = d.id;
+
+create table teens (
+	id serial primary key,
+	name varchar(255),
+	gender varchar(255)
+);
+
+insert into teens (name, gender)
+values
+('Tim Tayler', 'm'),
+('Luna Ramon', 'v'),
+('Enio Maricone', 'm'),
+('Mailo Stone', 'm'),
+('Kim Bild', 'v'),
+('Luci Talie', 'v');
+
+select * from teens t1 cross join teens t2 where t1.gender != t2.gender;
