@@ -36,7 +36,7 @@ select * from product as p join product_type as
 select * from products where name like
 '%icecream%';
 
-select * from product where  expired_date > date(now());
+select * from product where  expired_date < date(now());
 
 select * from product where price = (select max(price) from product);
 
@@ -44,7 +44,8 @@ select p.name, count(*) from product_type as pt join product as
  p on pt.id = p.type_id group by p.name;
 
 select * from product as p join product_type as
- pt on p.type_id = pt.id where pt.name = 'Chees' and pt.name ='Milk';
+ pt on p.type_id = pt.id where pt.name =
+ 'Chees' or pt.name ='Milk';
 
 select * from product as p join product_type as
  pt on p.type_id = pt.id where p.type_id < 10;
