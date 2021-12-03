@@ -12,7 +12,7 @@ public class ConnectionDemo {
         Config config = new Config("app.properties");
         config.load();
         Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost:5432/idea_db";
+        String url = config.value("hibernate.connection.url");
         String login = config.value("hibernate.connection.username");
         String password = config.value("hibernate.connection.password");
         try (Connection connection = DriverManager.getConnection(url, login, password)) {
