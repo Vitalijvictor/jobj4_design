@@ -42,7 +42,7 @@ select * from departments d left join emploers e on e.departments_id = d.id wher
 
 
 select * from emploers e left join departments d on e.department_id = d.id;
-select * from departments d left joinemploers e on e.department_id = d.id;
+select * from departments d left join emploers e on e.department_id = d.id;
 
 create table teens (
 	id serial primary key,
@@ -62,4 +62,4 @@ values
 select * from teens t1 cross join teens t2 where t1.gender != t2.gender;
 
 select d.name, e.name, e.departments_id from emploers e left join departments d on e.department_id = d.id;
-select d.name, e.name, e.departments_id from departments d left joinemploers e on e.department_id = d.id;
+select d.name, e.name, e.departments_id from departments d left join emploers e on e.department_id = d.id;
