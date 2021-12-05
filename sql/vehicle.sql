@@ -59,9 +59,9 @@ values
 
 
 select * from cars cr
-full join chassis ch on cr.chassis_id = ch.id
-full join engines en on cr.engine_id = en.id
-full join gear_boxes gb on cr.gear_box_id = gb.id;
+left join chassis ch on cr.chassis_id = ch.id
+left join engines en on cr.engine_id = en.id
+left join gear_boxes gb on cr.gear_box_id = gb.id;
 
 select * from chassis ch
 left join cars cr on cr.chassis_id = ch.id
