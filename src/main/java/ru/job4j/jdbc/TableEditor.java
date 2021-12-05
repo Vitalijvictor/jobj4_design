@@ -1,5 +1,7 @@
 package ru.job4j.jdbc;
 
+import ru.job4j.io.Config;
+
 import java.sql.*;
 import java.util.Properties;
 import java.util.StringJoiner;
@@ -10,16 +12,23 @@ public class TableEditor implements AutoCloseable {
 
     private Properties properties;
 
+    public final Statement statement = connection.createStatement();
+
     public TableEditor(Properties properties) throws SQLException, ClassNotFoundException {
         this.properties = properties;
         initConnection();
     }
 
     private Connection initConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
-        String url = "jdbc:postgresql://localhost:5432/idea_db";
-        String login = "postgres";
-        String password = "Azertyuiop1";
+        Config config = new Config("app.properties");
+        config.load();
+        Class.forName(properties.getProperty(config.value("hibernate"
+                + ".connection.driver_class")));
+        String url = properties.getProperty(config.value("hibernate.connection.url"));
+        String login = properties.getProperty(config.value("hibernate"
+                + ".connection.username"));
+        String password = properties.getProperty(config.value("hibernate"
+                + ".connection.password"));
         connection =  DriverManager.getConnection(url, login, password);
         DatabaseMetaData metaData = connection.getMetaData();
         System.out.println(metaData.getUserName());
@@ -28,58 +37,48 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        try (Connection connection = initConnection()) {
-            try (Statement statement = connection.createStatement()) {
+            try (statement) {
                 String sql = String.format(
                         "create table " + tableName + ";");
                 statement.execute(sql);
             }
-        }
         System.out.println(getTableScheme(connection, tableName));
     }
 
     public void dropTable(String tableName) throws Exception {
-        try (Connection connection = initConnection()) {
-            try (Statement statement = connection.createStatement()) {
+            try (statement) {
                 String sql = String.format(
                         "drop table " + tableName + ";");
                 statement.execute(sql);
             }
-        }
         System.out.println(getTableScheme(connection, tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        try (Connection connection = initConnection()) {
-            try (Statement statement = connection.createStatement()) {
+            try (statement) {
                 String sql = String.format(
                         "alter table " + tableName + " add " + columnName
                                 + " " + type + ";");
                 statement.execute(sql);
             }
-        }
         System.out.println(getTableScheme(connection, tableName));
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        try (Connection connection = initConnection()) {
-            try (Statement statement = connection.createStatement()) {
+            try (statement) {
                 String sql = String.format(
                         "alter table " + tableName + " drop column " + columnName + ";");
                 statement.execute(sql);
             }
-        }
         System.out.println(getTableScheme(connection, tableName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        try (Connection connection = initConnection()) {
-            try (Statement statement = connection.createStatement()) {
+            try (statement) {
                 String sql = String.format(
                         "alter table " + tableName + " rename column " + columnName + " to " + newColumnName + ";");
                 statement.execute(sql);
             }
-        }
         System.out.println(getTableScheme(connection, tableName));
     }
 
