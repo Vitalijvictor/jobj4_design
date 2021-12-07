@@ -17,16 +17,19 @@ public class TableEditor implements AutoCloseable {
         initConnection();
     }
 
+    public TableEditor() {
+    }
+
     private Connection initConnection() throws ClassNotFoundException, SQLException {
         Config config = new Config("app.properties");
         config.load();
-        Class.forName(properties.getProperty(config.value("hibernate"
-                + ".connection.driver_class")));
-        String url = properties.getProperty(config.value("hibernate.connection.url"));
-        String login = properties.getProperty(config.value("hibernate"
-                + ".connection.username"));
-        String password = properties.getProperty(config.value("hibernate"
-                + ".connection.password"));
+        Class.forName(properties
+                .getProperty("hibernate.connection.driver_class"));
+        String url = properties.getProperty("hibernate.connection.url");
+        String login = properties.getProperty("hibernate"
+                + ".connection.username");
+        String password = properties.getProperty("hibernate"
+                + ".connection.password");
         connection =  DriverManager.getConnection(url, login, password);
         DatabaseMetaData metaData = connection.getMetaData();
         System.out.println(metaData.getUserName());
@@ -35,50 +38,43 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "create table " + tableName + ";");
-                statement.execute(sql);
+        TableEditor tableEditor = new TableEditor();
+            if (tableEditor.statement(String.format("create table %s;",
+                    tableName))) {
+                System.out.println(getTableScheme(connection, tableName));
             }
-        System.out.println(getTableScheme(connection, tableName));
     }
 
     public void dropTable(String tableName) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "drop table " + tableName + ";");
-                statement.execute(sql);
-            }
-        System.out.println(getTableScheme(connection, tableName));
+        TableEditor tableEditor = new TableEditor();
+        if (tableEditor.statement(String.format("drop table %s;",
+                tableName))) {
+            System.out.println(getTableScheme(connection, tableName));
+        }
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "alter table " + tableName + " add " + columnName
-                                + " " + type + ";");
-                statement.execute(sql);
-            }
-
-        System.out.println(getTableScheme(connection, tableName));
+        TableEditor tableEditor = new TableEditor();
+        if (tableEditor.statement(String.format("alter table %s;", tableName,
+                "add %s", columnName, " ", type))) {
+            System.out.println(getTableScheme(connection, tableName));
+        }
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "alter table " + tableName + " drop column " + columnName + ";");
-                statement.execute(sql);
-            }
-        System.out.println(getTableScheme(connection, tableName));
+        TableEditor tableEditor = new TableEditor();
+        if (tableEditor.statement(String.format("alter table %s;", tableName,
+                "drop column %s", columnName))) {
+            System.out.println(getTableScheme(connection, tableName));
+        }
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-            try (Statement statement = connection.createStatement()) {
-                String sql = String.format(
-                        "alter table " + tableName + " rename column " + columnName + " to " + newColumnName + ";");
-                statement.execute(sql);
-            }
-        System.out.println(getTableScheme(connection, tableName));
+        TableEditor tableEditor = new TableEditor();
+        if (tableEditor.statement(String.format("alter table %s;", tableName,
+                "rename column %s", columnName, "to %s", columnName))) {
+            System.out.println(getTableScheme(connection, tableName));
+        }
     }
 
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
@@ -105,5 +101,12 @@ public class TableEditor implements AutoCloseable {
         if (connection != null) {
             connection.close();
         }
+    }
+
+    public boolean statement(String sql) throws SQLException {
+        Statement statement = connection.createStatement();
+        String method = String.format(sql);
+        statement.execute(sql);
+        return false;
     }
 }
