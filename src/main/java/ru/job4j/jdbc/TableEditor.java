@@ -21,15 +21,14 @@ public class TableEditor implements AutoCloseable {
     }
 
     private Connection initConnection() throws ClassNotFoundException, SQLException {
-        Config config = new Config("app.properties");
-        config.load();
         Class.forName(properties
                 .getProperty("hibernate.connection.driver_class"));
-        String url = properties.getProperty("hibernate.connection.url");
-        String login = properties.getProperty("hibernate"
-                + ".connection.username");
-        String password = properties.getProperty("hibernate"
-                + ".connection.password");
+        String url = properties
+                .getProperty("hibernate.connection.url");
+        String login = properties
+                .getProperty("hibernate.connection.username");
+        String password = properties
+                .getProperty("hibernate.connection.password");
         connection =  DriverManager.getConnection(url, login, password);
         DatabaseMetaData metaData = connection.getMetaData();
         System.out.println(metaData.getUserName());
@@ -38,43 +37,32 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void createTable(String tableName) throws Exception {
-        TableEditor tableEditor = new TableEditor();
-            if (tableEditor.statement(String.format("create table %s;",
-                    tableName))) {
-                System.out.println(getTableScheme(connection, tableName));
-            }
+        statement(String.format("create table %s;", tableName));
+        System.out.println(getTableScheme(connection, tableName));
     }
 
     public void dropTable(String tableName) throws Exception {
-        TableEditor tableEditor = new TableEditor();
-        if (tableEditor.statement(String.format("drop table %s;",
-                tableName))) {
-            System.out.println(getTableScheme(connection, tableName));
-        }
+        statement(String.format("drop table %s;", tableName));
+        System.out.println(getTableScheme(connection, tableName));
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        TableEditor tableEditor = new TableEditor();
-        if (tableEditor.statement(String.format("alter table %s;", tableName,
-                "add %s", columnName, " ", type))) {
+        statement(String.format("alter table %s;", tableName,
+                "add %s", columnName, " ", type));
             System.out.println(getTableScheme(connection, tableName));
-        }
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        TableEditor tableEditor = new TableEditor();
-        if (tableEditor.statement(String.format("alter table %s;", tableName,
-                "drop column %s", columnName))) {
+        statement(String.format("alter table %s;", tableName,
+                "drop column %s", columnName));
             System.out.println(getTableScheme(connection, tableName));
-        }
+
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        TableEditor tableEditor = new TableEditor();
-        if (tableEditor.statement(String.format("alter table %s;", tableName,
-                "rename column %s", columnName, "to %s", columnName))) {
+        statement(String.format("alter table %s;", tableName,
+                "rename column %s", columnName, "to %s", columnName));
             System.out.println(getTableScheme(connection, tableName));
-        }
     }
 
     public static String getTableScheme(Connection connection, String tableName) throws Exception {
@@ -103,10 +91,9 @@ public class TableEditor implements AutoCloseable {
         }
     }
 
-    public boolean statement(String sql) throws SQLException {
-        Statement statement = connection.createStatement();
-        String method = String.format(sql);
-        statement.execute(sql);
-        return false;
+    public void statement(String sql) throws SQLException {
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(sql);
+        }
     }
 }
