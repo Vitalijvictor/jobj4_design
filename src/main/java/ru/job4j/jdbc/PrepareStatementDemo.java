@@ -1,9 +1,6 @@
 package ru.job4j.jdbc;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +18,24 @@ public class PrepareStatementDemo {
         String login = "postgres";
         String password = "password";
         connection = DriverManager.getConnection(url, login, password);
+    }
+
+    public City insertWithId(City city) {
+        try (PreparedStatement statement =
+                     connection.prepareStatement("insert into cities(name, population) values (?, ?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, city.getName());
+            statement.setInt(2, city.getPopulation());
+            statement.execute();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    city.setId(generatedKeys.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return city;
     }
 
     public void insert(City city) {
@@ -77,5 +92,4 @@ public class PrepareStatementDemo {
         }
         return cities;
     }
-
 }
