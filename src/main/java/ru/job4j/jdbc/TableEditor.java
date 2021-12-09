@@ -47,21 +47,21 @@ public class TableEditor implements AutoCloseable {
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        statement(String.format("alter table %s;", tableName,
-                "add %s", columnName, " ", type));
+        statement(String.format("alter table %s add %s type %s", tableName,
+                columnName, type));
             System.out.println(getTableScheme(connection, tableName));
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        statement(String.format("alter table %s;", tableName,
-                "drop column %s", columnName));
+        statement(String.format("alter table %s drop column %s", tableName,
+                columnName));
             System.out.println(getTableScheme(connection, tableName));
 
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        statement(String.format("alter table %s;", tableName,
-                "rename column %s", columnName, "to %s", columnName));
+        statement(String.format("alter table %s rename column %s to %s",
+                tableName, columnName, newColumnName));
             System.out.println(getTableScheme(connection, tableName));
     }
 
