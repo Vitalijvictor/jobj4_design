@@ -8,9 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ImportDB {
 
@@ -25,11 +23,18 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
+            ///* rd.lines().forEach(...); */
             rd.lines()
-                    .forEach(s -> s.lines()
-                            .map(s1 -> s1.split(";", 2))
-                            .collect(Collectors.toList()));
+                    .forEach(s -> {
+                        String[] data = s.split(";", 3);
+                            if (data[0].equals("") || data[1].equals("")) {
+                                throw new RuntimeException("name and email "
+                                        + "expected");
+                            }
+                        users.add(new User(data[0], data[1]));
+                    });
         }
+
         return users;
     }
 
@@ -65,10 +70,13 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        try (FileInputStream in = new FileInputStream("./app.properties")) {
+        try (FileInputStream in = new FileInputStream("./spammer.properties")) {
             cfg.load(in);
         }
         ImportDB db = new ImportDB(cfg, "./pump.txt");
+        List<User> users = db.load();
+
+        users.forEach(u -> System.out.println(u.name + ":" + u.email));
         db.save(db.load());
     }
 }
