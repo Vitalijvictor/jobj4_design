@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 public class ImportDB {
 
@@ -23,7 +22,6 @@ public class ImportDB {
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            ///* rd.lines().forEach(...); */
             rd.lines()
                     .forEach(s -> {
                         String[] data = s.split(";", 3);
