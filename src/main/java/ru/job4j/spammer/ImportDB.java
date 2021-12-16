@@ -24,9 +24,9 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             rd.lines()
                     .forEach(s -> {
-                        String[] data = s.split(";", 3);
-                            if (data[0].equals("") || data[1].equals("")) {
-                                throw new RuntimeException("name and email "
+                        String[] data = s.split(";", 2);
+                            if (data[0].isEmpty() || data[1].isEmpty()) {
+                                throw new IllegalArgumentException("name and email "
                                         + "expected");
                             }
                         users.add(new User(data[0], data[1]));
