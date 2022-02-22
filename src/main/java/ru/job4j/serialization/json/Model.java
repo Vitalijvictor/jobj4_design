@@ -1,9 +1,20 @@
 package ru.job4j.serialization.json;
 
 public class Model {
-    private final String model;
+    private String model;
 
     public Model(String model) {
+        this.model = model;
+    }
+
+    public Model() {
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
         this.model = model;
     }
 
