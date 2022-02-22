@@ -7,7 +7,6 @@ import org.json.JSONObject;
 
 public class MainGuitar {
     public static void main(String[] args) {
-        // jsonObject
         final Guitar guitar = new Guitar(6, true, new Model("Warlock"), "Raptor",
                 new String[] {"John Cena", "Eddy Lee", "Jim Carrey"});
 
