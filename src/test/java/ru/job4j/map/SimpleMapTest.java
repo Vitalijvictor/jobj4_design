@@ -1,15 +1,8 @@
-/*
 package ru.job4j.map;
 
 import junit.framework.TestCase;
 import org.junit.Test;
-
 import org.hamcrest.core.Is;
-import org.junit.Test;
-
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-
 import static org.junit.Assert.assertThat;
 
 public class SimpleMapTest extends TestCase {
@@ -26,7 +19,8 @@ public class SimpleMapTest extends TestCase {
         SimpleMap<Integer, String> simpleMap = new SimpleMap();
         simpleMap.put(5, "John");
         simpleMap.put(5, "Jane");
-        assertThat(simpleMap.get(5), Is.is("Jane"));
+        simpleMap.put(5, "Mari");
+        assertThat(simpleMap.get(5), Is.is("John"));
     }
     @Test
     public void testPutCapacityOverflow() {
@@ -39,7 +33,7 @@ public class SimpleMapTest extends TestCase {
         simpleMap.put(3, "John");
         simpleMap.put(2, "John");
         simpleMap.put(1, "John");
-        assertThat(simpleMap.put(0, "John"), Is.is(false));
+        assertThat(simpleMap.put(0, "John"), Is.is(true));
     }
 
     @Test
@@ -70,20 +64,9 @@ public class SimpleMapTest extends TestCase {
     }
 
     @Test
-    public void testIterator() {
-        SimpleMap<Integer, String> simpleMap = new SimpleMap();
-        assertNull(simpleMap.iterator().next());
-    }
-
-    @Test(expected = ConcurrentModificationException.class)
-    public void testIteratorException() {
-        SimpleMap<Integer, String> simpleMap = new SimpleMap();
-        Iterator<Integer> rsl = simpleMap.iterator();
-        while (rsl.hasNext()) {
-            simpleMap.put(5, "John");
-            rsl.next();
-        }
+    public void whenDidntRemoveEntry() {
+        Map<Integer, String> map = new SimpleMap<>();
+        map.put(5, "five");
+        assertFalse(map.remove(55));
     }
 }
-
- */
